@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simple Modal</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">    
+    <style type="text/css">
+        #close {
+            background:url(/images/close.png) 0 0 no-repeat;
+            display:block;
+            height:41px;
+            position:absolute;
+            right:-7px;
+            text-indent:-9999px;
+            top:-7px;
+            width:40px;
+        }
+        #overlay{
+            position:absolute;
+            top:0;
+            left:0;
+            height:100%;
+            width:100%;
+            display:none;
+            background-color: black;
+        }
+        .modal-window {
+            border: 2px solid #a20067;
+            border-radius:8px;
+            background:#fff;
+            display: none;
+            height: 310px;
+            width: 480px;
+            position:absolute;
+            display:none;
+            color:white;
+        }
+        .modal-window h1 {
+            background: #444;
+            color: #fff;
+            font-size: 18px;
+            height: 30px;
+            padding: 14px 0 6px 20px;
+            text-transform: uppercase;
+        }
+        .modal-window p {
+            color: black;
+            margin-top: 10px;
+        }
+
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var window_width = $(window).width();
+            var window_height = $(window).height();
+
+            $('.modal-window').each(function(){
+                var modal_height = $(this).outerHeight();
+                var modal_width = $(this).outerWidth();
+                var top = (window_height-modal_height)/2;
+                var left = (window_width-modal_width)/2;
+                $(this).css({'top' : top , 'left' : left});
+            });
+
+            $('.activate_modal').click(function(){
+                var modal_id = $(this).attr('name');
+                show_modal(modal_id);
+            });
+
+            $('.closeModal').click(function(){
+                close_modal();
+            });
+
+        });
+
+        function close_modal(){
+            $('#overlay').fadeOut(500);
+            $('.modal-window').fadeOut(500);
+        }
+
+        function show_modal(modal_id){
+            $('#overlay').css({ 'display' : 'block', opacity : 1});
+            $('#overlay').fadeTo(500,0.8);
+            $('#'+modal_id).fadeIn(500);
+        }
+    </script>
+</head>
+
+<body>
+<div id="overlay" class="closeModal"></div>
+<div id="first_window" class="modal-window">
+    <h1>Simple Modal</h1>
+    <p>The html for this modal is hidden on the page</p>
+    <ul>
+        <li>Add details...</li>
+        <li>Add details...</li>
+        <li>Add details...</li>
+    </ul>
+</body>
+</html>
